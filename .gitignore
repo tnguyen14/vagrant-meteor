@@ -1,0 +1,8 @@
+*.sublime*
+.DS_Store
+
+/.vagrant
+
+/provision/provision-post.sh
+
+/meteor/*
