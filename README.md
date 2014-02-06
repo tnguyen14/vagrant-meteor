@@ -20,3 +20,14 @@ else
 	git clone git@github.com:username/a-project.git
 fi
 ```
+
+## Run meteor
+Once your project is pulled down and updated, you can run it with the following steps
+
+```sh
+$ vagrant ssh
+$ cd meteor/a-project
+$ mrt install 	# optional
+$ export MONGO_URL=mongodb://localhost:27017/a-db 	# optional
+$ meteor
+```
