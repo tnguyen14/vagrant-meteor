@@ -14,6 +14,17 @@ else
 	echo "No external network available."
 fi
 
+apt_packages_to_install=(
+	curl
+	g++
+	python
+	make
+	checkinstall
+	git
+	mongodb-10gen
+	nodejs
+)
+
 # Launchpad nodejs key C7917B12
 gpg -q --keyserver keyserver.ubuntu.com --recv-key C7917B12
 gpg -q -a --export  C7917B12  | apt-key add -
@@ -21,18 +32,22 @@ gpg -q -a --export  C7917B12  | apt-key add -
 gpg -q --keyserver keyserver.ubuntu.com --recv-key A1715D88E1DF1F24
 gpg -q -a --export A1715D88E1DF1F24 | apt-key add -
 # Mongodb
-gpg -q --keyserver keyserver.ubuntu.com --recv-key 7F0CEB10
-gpg -q -a --export  7F0CEB10  | apt-key add -
-
-add-apt-repository ppa:chris-lea/node.js --assume-yes
+# gpg -q --keyserver keyserver.ubuntu.com --recv-key 7F0CEB10
+# gpg -q -a --export  7F0CEB10  | apt-key add -
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
 
 apt-get update --assume-yes
+
+apt-get install --assume-yes python-software-properties
+add-apt-repository ppa:chris-lea/node.js
+
+apt-get update --assume-yes
+
 # apt-get upgrade --assume-yes
 
-apt-get install curl --assume-yes
-# Install mongo
 echo "Installing packages"
-apt-get install g++ python-software-properties python make checkinstall git mongodb-10gen nodejs --assume-yes
+apt-get install --assume-yes ${apt_packages_to_install[@]}
 
 apt-get clean
 
@@ -41,3 +56,5 @@ service mongodb restart
 
 # Install Meteor
 curl https://install.meteor.com | /bin/sh
+echo "Meteor Installed - Running Version"
+meteor --version
