@@ -52,6 +52,7 @@ apt-get install --assume-yes ${apt_packages_to_install[@]}
 apt-get clean
 
 echo "Restarting mongo"
+mkdir -p /data/db
 service mongodb restart
 
 # Install Meteor
