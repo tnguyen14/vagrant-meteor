@@ -49,7 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # This VM config option is required in order to be able to create the mount --bind symlink to the sync folder
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", 1024]
-    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/meteor", "1"]
   end
 
 
