@@ -45,6 +45,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   config.vm.synced_folder "meteor", "/home/vagrant/meteor"
 
+  # Make meteor work on windows
+  # This VM config option is required in order to be able to create the mount --bind symlink to the sync folder
+  config.vm.provider "virtualbox" do |v|
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
+  end
+
+
   # Privisioning
   if File.exists?(File.join(vagrant_dir,'provision','provision.sh')) then
     config.vm.provision :shell, :path => File.join( "provision", "provision.sh" )
