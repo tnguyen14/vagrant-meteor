@@ -48,7 +48,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Make meteor work on windows
   # This VM config option is required in order to be able to create the mount --bind symlink to the sync folder
   config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--memory", 512]
+    v.name = "meteor"
+    v.customize ["modifyvm", :id, "--memory", "512"]
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/meteor", "1"]
   end
 
